@@ -1,0 +1,134 @@
+{
+  "entities": [
+    {
+      "name": "Menu",
+      "created_at": false,
+      "updated_at": false,
+      "fields": [
+        {
+          "name": "menuName",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "category",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "price",
+          "type": "money",
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "TableAssignment",
+      "created_at": false,
+      "updated_at": false,
+      "fields": [
+        {
+          "name": "tableNumber",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "capacity",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "available"
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "created_at": false,
+      "updated_at": false,
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "menuItemId",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "quantity",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "orderStatus",
+          "type": "varchar",
+          "nullable": false,
+          "default": "pending"
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "created_at": false,
+      "updated_at": false,
+      "fields": [
+        {
+          "name": "paymentId",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "orderId",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "amount",
+          "type": "money",
+          "nullable": false
+        },
+        {
+          "name": "paymentStatus",
+          "type": "varchar",
+          "nullable": false,
+          "default": "pending"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Menu",
+      "to": "Order",
+      "type": "OneToMany"
+    },
+    {
+      "from": "TableAssignment",
+      "to": "Order",
+      "type": "OneToMany"
+    },
+    {
+      "from": "Order",
+      "to": "Payment",
+      "type": "OneToOne"
+    }
+  ],
+  "_removedEntities": [
+    "Event",
+    "Resignation",
+    "Ticket",
+    "Session",
+    "Attendance"
+  ]
+}
